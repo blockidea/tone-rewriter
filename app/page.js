@@ -95,7 +95,7 @@ export default function Home() {
     <p style={styles.error}>{error}</p>
     {error?.includes('Free limit') && (
     <button
-  onClick={() => window.location.href = '/api/checkout'}
+  onClick={() => window.location.href = 'https://buy.stripe.com/test_cN13cugIv9hYcqZ9dZZ2000'}
   style={{
     marginTop: '10px',
     padding: '10px 16px',
