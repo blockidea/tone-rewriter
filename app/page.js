@@ -10,16 +10,11 @@ export default function Home() {
   const [copied, setCopied] = useState('');
 
   async function rewrite() {
-    if (!input.trim()) {
-      setError('Please type something first.');
-      return;
-    }async function rewrite() {
   if (!input.trim()) {
     setError('Please type something first.');
     return;
   }
 
-  // usage limit
   const today = new Date().toISOString().slice(0, 10);
   const usageKey = `usage_${today}`;
 
@@ -41,25 +36,24 @@ export default function Home() {
   setError('');
   setLoading(true);
   setResults(null);
-    setError('');
-    setLoading(true);
-    setResults(null);
 
-    try {
-      const res = await fetch('/api/rewrite', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: input }),
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setResults(data);
-    } catch (e) {
-      setError(e.message || 'Something went wrong. Please try again.');
-    }
+  try {
+    const res = await fetch('/api/rewrite', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: input }),
+    });
 
-    setLoading(false);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    setResults(data);
+  } catch (e) {
+    setError(e.message || 'Something went wrong. Please try again.');
   }
+
+  setLoading(false);
+}
 
   function copy(tone) {
     navigator.clipboard.writeText(results[tone]);
