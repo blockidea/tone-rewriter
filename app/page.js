@@ -26,7 +26,8 @@ export default function Home() {
     const usage = Number(localStorage.getItem(usageKey) || '0');
 
     if (usage >= 5) {
-      setError('Free limit reached. Unlimited access coming soon.');
+      setError('Free limit reached. Upgrade to Pro for unlimited rewrites.');
+      setResults(null);
       return;
     }
 
