@@ -13,7 +13,34 @@ export default function Home() {
     if (!input.trim()) {
       setError('Please type something first.');
       return;
+    }async function rewrite() {
+  if (!input.trim()) {
+    setError('Please type something first.');
+    return;
+  }
+
+  // usage limit
+  const today = new Date().toISOString().slice(0, 10);
+  const usageKey = `usage_${today}`;
+
+  const isDeveloper =
+    typeof window !== 'undefined' &&
+    localStorage.getItem('isDeveloper') === 'true';
+
+  if (!isDeveloper) {
+    const usage = Number(localStorage.getItem(usageKey) || '0');
+
+    if (usage >= 5) {
+      setError('Free limit reached. Unlimited access coming soon.');
+      return;
     }
+
+    localStorage.setItem(usageKey, String(usage + 1));
+  }
+
+  setError('');
+  setLoading(true);
+  setResults(null);
     setError('');
     setLoading(true);
     setResults(null);
