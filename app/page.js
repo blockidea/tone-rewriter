@@ -90,9 +90,27 @@ export default function Home() {
         <button style={styles.btn} onClick={rewrite} disabled={loading}>
           {loading ? 'Rewriting…' : 'Rewrite in 3 tones'}
         </button>
-
-        {error && <p style={styles.error}>{error}</p>}
-
+        {error && (
+  <div>
+    <p style={styles.error}>{error}</p>
+    {error?.includes('Free limit') && (
+    <button
+  onClick={() => window.location.href = '/api/checkout'}
+  style={{
+    marginTop: '10px',
+    padding: '10px 16px',
+    background: '#1a1a18',
+    color: '#f7f5f0',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer'
+  }}
+  >
+  Upgrade to Pro
+</button>
+    )}
+  </div>
+)}
         {results && (
           <div style={styles.results}>
             {tones.map(({ key, label, color }) => (
