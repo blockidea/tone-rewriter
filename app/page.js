@@ -26,7 +26,7 @@ export default function Home() {
     const usage = Number(localStorage.getItem(usageKey) || '0');
 
     if (usage >= 5) {
-      setError('Free limit reached. Upgrade to Pro for unlimited rewrites.');
+      setError('Free limit reached. Fix every message instantly - go unlimtied.');
       setResults(null);
       return;
     }
@@ -95,7 +95,7 @@ export default function Home() {
     <p style={styles.error}>{error}</p>
     {error?.includes('Free limit') && (
     <button
-  onClick={() => window.location.href = 'https://buy.stripe.com/test_cNi3cugIv9hYcqZ9dZ2ZO00'}
+  onClick={() => window.location.href = 'https://buy.stripe.com/cNi3cugIv9hYcqZ9dZ2ZO00'}
   style={{
     marginTop: '10px',
     padding: '10px 16px',
@@ -106,7 +106,7 @@ export default function Home() {
     cursor: 'pointer'
   }}
   >
-  Upgrade to Pro
+  Unlock Unlimited Rewrites - $4.99/mo
 </button>
     )}
   </div>
