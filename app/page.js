@@ -1,8 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export default function Home() {
+  const email = "test@gmail.com"
+  const [isPro, setIsPro] = useState(false)
+  useEffect(() => {
+  const checkUser = async () => {
+    const { data } = await supabase
+      .from('profiles')
+      .select('is_pro')
+      .eq('email', email)
+      .single()
+
+    if (data?.is_pro) {
+      setIsPro(true)
+    }
+  }
+
+  checkUser()
+}, [])
   const [input, setInput] = useState('');
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -25,7 +48,7 @@ export default function Home() {
   if (!isDeveloper) {
     const usage = Number(localStorage.getItem(usageKey) || '0');
 
-    if (usage >= 5) {
+    if (!isPro && usage >= 5) {
       setError('Free limit reached. Fix every message instantly - go unlimtied.');
       setResults(null);
       return;
