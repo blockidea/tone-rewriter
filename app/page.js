@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
   const checkUser = async () => {
     const { data } = await supabase
-      .from('profiles')
+      .from('users')
       .select('is_pro')
       .eq('email', email)
       .single()
