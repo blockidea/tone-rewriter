@@ -136,6 +136,16 @@ useEffect(() => {
     cursor: 'pointer'
   }}
   >
+  <button
+  onClick={async () => {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+    })
+
+    const data = await res.json()
+    window.location.href = data.url
+  }}
+>
   Unlock Unlimited Rewrites - $4.99/mo
 </button>
     )}
