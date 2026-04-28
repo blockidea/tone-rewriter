@@ -13,7 +13,18 @@ export default function Home() {
   const [isPro, setIsPro] = useState(false)
   useEffect(() => {
   const checkUser = async () => {
-    const { data } = await supabase
+    const { data, error } = await supabase
+  .from('users')
+  .select('is_pro')
+  .eq('email', email)
+  .single()
+
+console.log('data:', data)
+console.log('error:', error)
+
+if (data?.is_pro) {
+  setIsPro(true)
+}
       .from('users')
       .select('is_pro')
       .eq('email', email)
