@@ -11,14 +11,7 @@ const supabase = createClient(
 export default function Home() {
   const email = "test@gmail.com"
   const [isPro, setIsPro] = useState(false)
-  useEffect(() => {
-  const checkUser = async () => {
-    const { data, error } = await supabase
-  .from('users')
-  .select('is_pro')
-  .eq('email', email)
   .single()
-
 console.log('data:', data)
 console.log('error:', error)
 
