@@ -22,10 +22,24 @@ export default function Home() {
 console.log('data:', data)
 console.log('error:', error)
 
-if (data?.is_pro) {
-  setIsPro(true)
-}
+useEffect(() => {
+  const checkUser = async () => {
+    const { data, error } = await supabase
       .from('users')
+      .select('is_pro')
+      .eq('email', email)
+      .single()
+
+    console.log('data:', data)
+    console.log('error:', error)
+
+    if (data?.is_pro) {
+      setIsPro(true)
+    }
+  }
+
+  checkUser()
+}, [])
       .select('is_pro')
       .eq('email', email)
       .single()
