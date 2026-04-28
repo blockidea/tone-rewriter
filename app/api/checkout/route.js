@@ -12,8 +12,8 @@ export async function POST() {
       },
     ],
     mode: 'subscription',
-    success_url: 'https://your-domain.vercel.app?success=true',
-    cancel_url: 'https://your-domain.vercel.app?canceled=true',
+    success_url: 'https://tone-rewriter-eight.vercel.app?success=true',
+    cancel_url: 'https://tone-rewriter-eight.vercel.app?canceled=true',
   })
 
   return Response.json({ url: session.url })
